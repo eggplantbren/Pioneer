@@ -9,10 +9,10 @@ Database::Database()
 {
     pragmas();
 
-    db << "BEGIN;";
+    begin();
     clear();
     create_tables();
-    db << "COMMIT;";
+    commit();
 }
 
 
@@ -43,6 +43,17 @@ void Database::create_tables()
  PRIMARY KEY (particle_id, scalar))\
 WITHOUT ROWID;";
 
+}
+
+void Database::begin()
+{
+    db << "BEGIN;";
+}
+
+
+void Database::commit()
+{
+    db << "COMMIT;";
 }
 
 

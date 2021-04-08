@@ -29,7 +29,20 @@ Sampler<T>::Sampler()
     }
 
     std::cout << "\nDone.\n" << std::endl;
+
+    save_and_update();
 }
+
+
+
+template<typename T>
+void Sampler<T>::save_particles()
+{
+    for(int i=0; i<num_particles; ++i)
+        database.save_particle(scalars[i]);
+}
+
+
 
 
 template<typename T>
@@ -41,7 +54,15 @@ void Sampler<T>::update_target()
 }
 
 
-
+template<typename T>
+void Sampler<T>::save_and_update()
+{
+    std::cout << "Saving particles and updating target distribution.";
+    std::cout << std::flush;
+    save_particles();
+    update_target();
+    std::cout << "\nDone.\n" << std::endl;
+}
 
 template<typename T>
 void Sampler<T>::explore(int mcmc_steps)
@@ -72,7 +93,9 @@ void Sampler<T>::explore(int mcmc_steps)
     }
 
     std::cout << "\nDone. Acceptance rate = ";
-    std::cout << accepted << '/' << mcmc_steps << '.' << std::endl;
+    std::cout << accepted << '/' << mcmc_steps << ".\n" << std::endl;
+
+    save_and_update();
 }
 
 

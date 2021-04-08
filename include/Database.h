@@ -19,6 +19,10 @@ class Database
     public:
         Database();
 
+        // Transaction control
+        void begin();
+        void commit();
+
         // Save a particle
         void save_particle(const std::vector<double>& scalars);
 

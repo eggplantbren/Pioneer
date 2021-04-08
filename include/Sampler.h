@@ -28,8 +28,14 @@ class Sampler
         Target target;
         std::vector<double> logps;
 
+        // Save particles
+        void save_particles();
+
         // Update target distribution
         void update_target();
+
+        // Just do the above two functions, with some logging
+        void save_and_update();
 
 
     public:
