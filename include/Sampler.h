@@ -1,6 +1,7 @@
 #ifndef Pioneer_Sampler_h
 #define Pioneer_Sampler_h
 
+#include <Database.h>
 #include <Target.h>
 #include <Tools/RNG.hpp>
 #include <vector>
@@ -12,6 +13,9 @@ template<typename T>
 class Sampler
 {
     private:
+
+        // Output database
+        Database database;
 
         // RNG to use
         Tools::RNG rng;

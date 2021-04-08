@@ -1,2 +1,5 @@
 libpioneer.a
 main
+output/pioneer.db
+output/pioneer.db-shm
+output/pioneer.db-wal
