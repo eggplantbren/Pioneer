@@ -20,6 +20,8 @@ Sampler<T>::Sampler()
         std::vector<double> ss = t.scalars();
         double logp = target.evaluate(ss);
 
+        database.save_particle(ss);
+
         particles.emplace_back(std::move(t));
         scalars.emplace_back(std::move(ss));
         logps.push_back(logp);

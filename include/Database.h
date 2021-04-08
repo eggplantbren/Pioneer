@@ -2,6 +2,7 @@
 #define Pioneer_Database_h
 
 #include <sqlite_modern_cpp/hdr/sqlite_modern_cpp.h>
+#include <vector>
 
 namespace Pioneer
 {
@@ -17,6 +18,9 @@ class Database
 
     public:
         Database();
+
+        // Save a particle
+        void save_particle(const std::vector<double>& scalars);
 
 };
 

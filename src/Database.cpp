@@ -46,6 +46,19 @@ WITHOUT ROWID;";
 }
 
 
+void Database::save_particle(const std::vector<double>& scalars)
+{
+    int particle_id;
+    db << "INSERT INTO particles DEFAULT values;";
+    db << "SELECT LAST_INSERT_ROWID();" >> particle_id;
+
+    for(size_t i=0; i<scalars.size(); ++i)
+    {
+        db << "INSERT INTO scalars VALUES (?, ?, ?);"
+           << particle_id << i << scalars[i];
+    }
+}
+
 
 } // namespace
 
