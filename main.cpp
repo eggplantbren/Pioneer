@@ -6,7 +6,7 @@ using namespace Pioneer;
 
 int main()
 {
-
+    Sampler<Example> sampler;
     return 0;
 }
 
