@@ -8,6 +8,7 @@ namespace Pioneer
 
 template<typename T>
 Sampler<T>::Sampler()
+:epoch(0)
 {
     std::cout << "Initialising sampler." << std::flush;
 
@@ -20,8 +21,6 @@ Sampler<T>::Sampler()
         T t(rng);
         std::vector<double> ss = t.scalars();
         double logp = target.evaluate(ss);
-
-        database.save_particle(ss);
 
         particles.emplace_back(std::move(t));
         scalars.emplace_back(std::move(ss));
@@ -39,7 +38,7 @@ template<typename T>
 void Sampler<T>::save_particles()
 {
     for(int i=0; i<num_particles; ++i)
-        database.save_particle(scalars[i]);
+        database.save_particle(epoch, scalars[i]);
 }
 
 
@@ -51,6 +50,7 @@ void Sampler<T>::update_target()
     target.update(database);
     for(int i=0; i<num_particles; ++i)
         logps[i] = target.evaluate(scalars[i]);
+    ++epoch;
 }
 
 
@@ -75,16 +75,17 @@ void Sampler<T>::explore(int mcmc_steps)
         // Choose a particle
         int k = rng.rand_int(num_particles);
 
-        T proposal = particles[k];
-        double logh = proposal.perturb(rng);
+        T proposal_t = particles[k];
+        double logh = proposal_t.perturb(rng);
         if(rng.rand() <= exp(logh))
         {
-            auto proposal_scalars = proposal.scalars();
+            auto proposal_scalars = proposal_t.scalars();
             double proposal_logp = target.evaluate(proposal_scalars);
             if(rng.rand() <= exp(proposal_logp - logps[k]))
             {
                 // Accept
-                particles[k] = proposal;
+                particles[k] = proposal_t;
+                scalars[k] = proposal_scalars;
                 logps[k] = proposal_logp;
                 ++accepted;
             }

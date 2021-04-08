@@ -20,6 +20,9 @@ class Sampler
         // RNG to use
         Tools::RNG rng;
 
+        // Epoch counter
+        int epoch;
+
         // The particles and their scalars
         std::vector<T> particles;
         std::vector<std::vector<double>> scalars;

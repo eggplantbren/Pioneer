@@ -24,7 +24,7 @@ class Database
         void commit();
 
         // Save a particle
-        void save_particle(const std::vector<double>& scalars);
+        void save_particle(int epoch, const std::vector<double>& scalars);
 
         // Load scalars
         std::vector<std::vector<double>> load_scalars();

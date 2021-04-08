@@ -34,7 +34,8 @@ void Database::clear()
 void Database::create_tables()
 {
     db << "CREATE TABLE IF NOT EXISTS particles\
-(id INTEGER NOT NULL PRIMARY KEY);";
+(id    INTEGER NOT NULL PRIMARY KEY,\
+ epoch INTEGER NOT NULL);";
 
     db << "CREATE TABLE IF NOT EXISTS scalars\
 (particle_id INTEGER NOT NULL REFERENCES particles (id),\
@@ -57,10 +58,10 @@ void Database::commit()
 }
 
 
-void Database::save_particle(const std::vector<double>& scalars)
+void Database::save_particle(int epoch, const std::vector<double>& scalars)
 {
     int particle_id;
-    db << "INSERT INTO particles DEFAULT values;";
+    db << "INSERT INTO particles (epoch) VALUES (?);" << epoch;
     db << "SELECT LAST_INSERT_ROWID();" >> particle_id;
 
     for(size_t i=0; i<scalars.size(); ++i)
