@@ -13,11 +13,16 @@ Sampler<T>::Sampler()
 
     particles.reserve(num_particles);
     scalars.reserve(num_particles);
+    logps.reserve(num_particles);
     for(int i=0; i<num_particles; ++i)
     {
         T t(rng);
-        scalars.emplace_back(t.scalars());
+        std::vector<double> ss = t.scalars();
+        double logp = target.evaluate(ss);
+
         particles.emplace_back(std::move(t));
+        scalars.emplace_back(std::move(ss));
+        logps.push_back(logp);
     }
 
     std::cout << "done." << std::endl;

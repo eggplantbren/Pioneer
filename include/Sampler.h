@@ -1,6 +1,7 @@
 #ifndef Pioneer_Sampler_h
 #define Pioneer_Sampler_h
 
+#include <Target.h>
 #include <Tools/RNG.hpp>
 #include <vector>
 
@@ -18,6 +19,10 @@ class Sampler
         // The particles and their scalars
         std::vector<T> particles;
         std::vector<std::vector<double>> scalars;
+
+        // Target distribution and its evaluations
+        Target target;
+        std::vector<double> logps;
 
 
     public:
