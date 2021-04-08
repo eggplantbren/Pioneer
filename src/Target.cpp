@@ -1,5 +1,7 @@
 #include "Target.h"
 #include "Compare.h"
+#include "Constants.h"
+#include <cmath>
 #include <iostream>
 
 namespace Pioneer
@@ -14,7 +16,9 @@ double Target::evaluate(const std::vector<double>& _scalars) const
         if(all_below(_scalars, ss))
             ++ucc;
     }
-    return -double(ucc);
+    double dist = double(ucc)/(lambda*num_particles);
+
+    return -log(1.0 + dist*dist);
 }
 
 void Target::update(Database& database)

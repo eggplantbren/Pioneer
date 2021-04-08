@@ -67,7 +67,7 @@ void Sampler<T>::save_and_update()
 template<typename T>
 void Sampler<T>::explore(int mcmc_steps)
 {
-    std::cout << "Exploring." << std::flush;
+    std::cout << "Exploring at epoch " << epoch << '.' << std::flush;
 
     int accepted = 0;
     for(int i=0; i<mcmc_steps; ++i)
