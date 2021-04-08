@@ -28,11 +28,17 @@ class Sampler
         Target target;
         std::vector<double> logps;
 
+        // Update target distribution
+        void update_target();
+
 
     public:
+
+        // Initialise sampler
         Sampler();
 
-
+        // Do some exploration
+        void explore(int mcmc_steps);
 };
 
 } // namespace

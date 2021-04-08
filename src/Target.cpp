@@ -21,8 +21,6 @@ void Target::update(Database& database)
 {
     std::vector<std::vector<double>> updated = database.load_scalars();
     std::swap(updated, scalars);
-    std::cout << "Updated target distribution; there are now ";
-    std::cout << scalars.size() << " points." << std::endl;
 }
 
 } // namespace

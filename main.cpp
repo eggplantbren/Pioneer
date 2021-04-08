@@ -6,7 +6,10 @@ using namespace Pioneer;
 
 int main()
 {
+
     Sampler<Example> sampler;
+    sampler.explore(10000);
+
     return 0;
 }
 
