@@ -8,7 +8,9 @@ int main()
 {
 
     Sampler<Example> sampler;
-    sampler.explore(10000);
+
+    for(int i=0; i<100; ++i)
+        sampler.explore(10000);
 
     return 0;
 }
