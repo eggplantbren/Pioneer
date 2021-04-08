@@ -60,5 +60,21 @@ void Database::save_particle(const std::vector<double>& scalars)
 }
 
 
+std::vector<std::vector<double>> Database::load_scalars()
+{
+    std::vector<std::vector<double>> scalars;
+
+    db << "SELECT scalar, value FROM scalars ORDER BY particle_id, scalar;" >>
+        [&](int scalar, double value)
+        {
+            if(scalar == 0)
+                scalars.push_back(std::vector<double>{});
+            scalars.back().push_back(value);
+        };
+
+    return scalars;
+}
+
+
 } // namespace
 

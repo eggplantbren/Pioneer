@@ -28,6 +28,8 @@ Sampler<T>::Sampler()
     }
 
     std::cout << "done." << std::endl;
+
+    target.update(database);
 }
 
 

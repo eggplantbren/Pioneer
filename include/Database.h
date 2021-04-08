@@ -22,6 +22,9 @@ class Database
         // Save a particle
         void save_particle(const std::vector<double>& scalars);
 
+        // Load scalars
+        std::vector<std::vector<double>> load_scalars();
+
 };
 
 } // namespace
